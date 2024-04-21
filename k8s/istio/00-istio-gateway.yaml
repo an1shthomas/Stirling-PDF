@@ -1,0 +1,37 @@
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: stirling-pdf-gateway
+  namespace: stirling
+spec:
+  selector:
+    istio: ingressgateway
+  servers:
+  - port:
+      number: 80
+      name: http
+      protocol: HTTP
+    hosts:
+    - "stirlingpdf.anish.sh"
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: stirling-pdf
+  namespace: stirling
+spec:
+  hosts:
+  - "stirlingpdf.anish.sh"
+  gateways:
+  - stirling-pdf-gateway
+  http:
+  - match:
+    - uri:
+        prefix: /
+    route:
+    - destination:
+        port:
+          number: 80
+        host: stirling-pdf
+

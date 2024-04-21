@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: stirling-pdf
+  name: stirling-pdf
+  namespace: stirling
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: stirling-pdf
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: stirling-pdf
+    spec:
+      containers:
+      - image: anishkthomas/stirling-pdf
+        name: stirling-pdf
+        ports:
+        - containerPort: 8080
+        env:
+        - name: DOCKER_ENABLE_SECURITY
+          value: "false"
+        - name: INSTALL_BOOK_AND_ADVANCED_HTML_OPS
+          value: "false"
+        volumeMounts:
+        - name: stirling-tessdata
+          mountPath: /usr/share/tessdata
+        - name: stirling-extraconfigs
+          mountPath: /configs
+        - name: stirling-logs
+          mountPath: /logs
+      volumes:
+      - name: stirling-tessdata
+        emptyDir: {}        
+      - name: stirling-extraconfigs
+        emptyDir: {}
+      - name: stirling-logs
+        emptyDir: {}
+status: {}
+

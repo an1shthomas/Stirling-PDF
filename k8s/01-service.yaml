@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: stirling-pdf
+  name: stirling-pdf
+  namespace: stirling
+spec:
+  ports:
+  - name: 80-8080
+    port: 80
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: stirling-pdf
+  type: ClusterIP
+status:
+  loadBalancer: {}

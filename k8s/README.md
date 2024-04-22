@@ -11,12 +11,16 @@ docker run -d -p 8080:8080 -v ./data/tessdata:/usr/share/tessdata -v ./data/extr
 ```
 
 # Deploy to kubernetes
+
 ```bash
+alias k=kubectl
 k apply -f k8s/manifests
 ```
 
 # Portforwarding
+
 ```bash
+alias k=kubectl
 k -n stirling port-forward svc/stirling-pdf 8080:80
 ```
 

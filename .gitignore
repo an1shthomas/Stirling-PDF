@@ -125,3 +125,8 @@ watchedFolders/
 # Ignore Mac DS_Store files
 .DS_Store
 **/.DS_Store
+
+# Ignore data
+data/extraConfigs
+data/logs
+data/tessdata
